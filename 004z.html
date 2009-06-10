@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>004z</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "004" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "005" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                       Introduction to Acmeism
+     
+     * I've decided to name my theme &quot;Acmeism&quot;
+     * Acme means &quot;highest point&quot; or &quot;best of man&quot;
+     * Acme:: is where the &quot;best&quot; Perl modules go
+     
+     * Acmeism is the Tower of Babel in Reverse
+     * All the great hackers are artificially tied to a language
+     * Great ideas rise above programming languages
+     * When Acmeism is acheived, the hackers will be free!
+
+
+
+
+
+</pre>
+</body>

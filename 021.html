@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>021</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "020" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "022" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                            The 1.0 Spec
+     
+     * The 1.0 specification currently has the most info about TestML.
+     
+             http://testml.org/spec/
+     
+     * The spec has a full pBNF grammar of the language.
+     * 1.0 will be the first release
+     * Will be released as soon as TestML &quot;stabilizes&quot;
+
+
+
+
+
+
+</pre>
+</body>

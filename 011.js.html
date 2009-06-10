@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>011.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "010.pl" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "012.pl" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>     // Similar test in JavaScript
+     t = new Test.Base();
+     t.plan(2);
+     
+     t.filters({ js: ['eval','encode'] });
+     t.run_is('js', 'json');
+     
+     t.encode = function(text) {
+         return JSON.encode(text) + &quot;\n&quot;;
+     }
+     
+     /* Test
+     === Simple hash
+     --- js
+     { size: 42, color: 'green' }
+     --- json
+     {&quot;color&quot;:&quot;green&quot;,&quot;size&quot;:42}
+     
+     === Simple array
+     --- js
+     ['red', 'white', 'blue']
+     --- json
+     [&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;]
+     */
+</pre>
+</body>

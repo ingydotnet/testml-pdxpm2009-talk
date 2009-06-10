@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>010.pl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "009" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "011.js" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre># An example test.t Test::Base test in Perl
+use Test::Base tests =&gt; 2;
+use JSON::XS;
+
+filters { perl =&gt; [qw(eval encode)] };
+run_is perl =&gt; 'json';
+
+sub encode {
+    return encode_json(shift) . &quot;\n&quot;;
+}
+
+__END__
+=== Simple hash
+--- perl
+{ size =&gt; 42, color =&gt; 'green' }
+--- json
+{&quot;color&quot;:&quot;green&quot;,&quot;size&quot;:42}
+
+=== Simple array
+--- perl
+[qw(red white blue)]
+--- json
+[&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;]
+</pre>
+</body>

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>023</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "022" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "024" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+                     TestML Vocabulary Glossary
+     
+     * application - the code being tested
+     * document - a complete TestML file or stream (meta/test/data)
+     * section - meta, test or data
+     * bridge - a class that connects a document to the application
+     * block - a labeled set of named data points
+     * point - a named piece of data
+     * transform - a method that changes a data point's state
+     * assertion - a truth test on 2 transformed data points
+     * runner - the class that makes TestML work with your framework
+
+
+
+
+
+</pre>
+</body>

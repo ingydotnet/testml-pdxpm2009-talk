@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>020</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "019" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "021" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+                    TestML is Self Bootstrapping
+     
+     * Writing a test framework is TDD by definition
+     * TestML is TDD multiplied by implementations
+     * All new ideas start at the sources:
+     ** The TestML Spec
+     ** The TestML TestSuite -- testml-tml repo
+     * Spec changes get propagated to grammar.yaml
+     * Problems with the language can be written as tests
+     * All implementations can be ports of any other
+     * Change propagation is critical
+     ** But common tests ensure it
+
+
+
+
+</pre>
+</body>

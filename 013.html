@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>013</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "012.pl" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "014.pl" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>     # A TestML Document!
+     %TestML: 1.0
+     %Plan: 2
+     
+     perl.eval().encode() == json;
+     
+     === Simple hash
+     --- perl
+     { size =&gt; 42, color =&gt; 'green' }
+     --- json
+     {&quot;color&quot;:&quot;green&quot;,&quot;size&quot;:42}
+     
+     === Simple array
+     --- perl
+     [qw(red white blue)]
+     --- json
+     [&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;]
+
+</pre>
+</body>

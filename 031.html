@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>031</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "030" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "032" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+                     Project Status and Roadmap
+     
+     * TestML development is a highly iterative process
+     * Specification, Design, Implementation and Testing all at once
+     * Probably 3 months until 1.0 release
+     ** Designed and intended to be released often
+     ** But need to get first release fully baked
+     
+     * Add to real world projects
+     * Make changes to specs
+     * Propagate out through implementations
+     * Rinse, Lather, Repeat
+
+
+
+
+</pre>
+</body>

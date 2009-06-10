@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>003c</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "003b" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "003z" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>                       Introduction to Acmeism
+     
+     * &quot;Ingy Projects&quot; have a common theme:
+     
+            &gt;&gt; Crossing Language Borders!! &lt;&lt;
+     
+     ** Inline       - All programming languages in Perl
+     ** YAML         - Cross language serialization
+     ** Test-Base    - Precursor to TestML is Perl and JS
+     ** Jemplate     - TT2 in JS (and beyond)
+     ** pQuery       - jQuery in Perl (and beyond)
+     ** WikiText     - Wiki markup interchange
+     ** C'Dent       - Portable library programming language
+     ** CogBase      - KiokuDB in all languages?
+
+
+
+
+</pre>
+</body>
