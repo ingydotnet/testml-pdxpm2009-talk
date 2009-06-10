@@ -1,0 +1,419 @@
+---- config
+title: TestML -- The Portable Testing Meta Language
+indent: 5
+height: 18
+width: 69
+# skip: 4
+---- center
+TestML -- A Software Testing Meta Language
+
+by Ingy döt Net
+
+Portland Perl Mongers Meeting
+
+10 June 2009
+---- i2
+== Introduction to Acmeism
+
++I beg you be logical in the design and structure of your work,
+in syntax . . . be a skillful builder, both in small things and
+in the whole . . .  love words, as Flaubert did, exercise
+economy in your means, thrift in the use of words, precision and
+authenticity--then you will discover the secret of a wonderful
+thing: beauty clarity.
+                                        --Mikhail Kuzmin, 1910
+
++    "Acmeism" was a short lived Russian poetry movement
+    from a century ago.
+----
+== Introduction to Acmeism
+
+* "Ingy Projects" have a common theme:
+
++       >> Crossing Language Borders!! <<
+
++** Inline       - All programming languages in Perl
+** YAML         - Cross language serialization
+** Test-Base    - Precursor to TestML is Perl and JS
+** Jemplate     - TT2 in JS (and beyond)
+** pQuery       - jQuery in Perl (and beyond)
+** WikiText     - Wiki markup interchange
+** C'Dent       - Portable library programming language
+** CogBase      - KiokuDB in all languages?
++
+** TestML       - Language independent tests framework
+
+----
+== Introduction to Acmeism
+
+* I've decided to name my theme "Acmeism"
+* Acme means "highest point" or "best of man"
+* Acme:: is where the "best" Perl modules go
+
++* Acmeism is the Tower of Babel in Reverse
+* All the great hackers are artificially tied to a language
+* Great ideas rise above programming languages
+* When Acmeism is acheived, the hackers will be free!
+
+----
+== Introduction to Acmeism
+
+    Acmeism embraces good programming ideas
+
+    Acmeism transcends programming languages
+
+    Acmeism unites great hackers
+
+----
+
+== Introduction to C'Dent
+
+* C'Dent is the "Language of Acmeism"
+* Write Once, Upload Everywhere
+* Write Perl, Python, JavaScript, Ruby
+* Compile to any one of those...
+* ...or Perl 6 or Java or C
+
+----
+
+== Introduction to TestML
+
+* Think about YAML implementations
+* Think about Perl 6 modules
+* Think about porting software
+* Think about speccing new libraries
+* TestML is the necessary predecessor to C'Dent
+
+----
+
+== Review of Test::Base
+
+* Used Test::Base for all unit testing for the last 5 years
+* Test::Base was a (possibly poor) name for many good ideas
+* Simple subclassing of Test::More/Test::Builder
+* Written in Perl, ported to JavaScript
+* Data driven unit testing
+* Data filtered/transformed until it matched another datum
+* Simplicity and flexibility in writing tests
+* _Almost_ cross language...
+
+----
+
+== ALERT: REAL CODE ON NEXT SLIDE !!!
+
+---- perl,i0
+# An example test.t Test::Base test in Perl
+use Test::Base tests => 2;
+use JSON::XS;
+
+filters { perl => [qw(eval encode)] };
+run_is perl => 'json';
+
+sub encode {
+    return encode_json(shift) . "\n";
+}
+
+__END__
+=== Simple hash
+--- perl
+{ size => 42, color => 'green' }
+--- json
+{"color":"green","size":42}
+
+=== Simple array
+--- perl
+[qw(red white blue)]
+--- json
+["red","white","blue"]
+
+---- js
+// Similar test in JavaScript
+t = new Test.Base();
+t.plan(2);
+
+t.filters({ js: ['eval','encode'] });
+t.run_is('js', 'json');
+
+t.encode = function(text) {
+    return JSON.encode(text) + "\n";
+}
+
+/* Test
+=== Simple hash
+--- js
+{ size: 42, color: 'green' }
+--- json
+{"color":"green","size":42}
+
+=== Simple array
+--- js
+['red', 'white', 'blue']
+--- json
+["red","white","blue"]
+*/
+
+---- perl,i0
+# Condensed Perl
+use MyTestClass tests => 2;
+filters { perl => [qw(eval encode)] };
+run_is perl => 'json';
+
+__END__
+=== Simple hash
+--- perl
+{ size => 42, color => 'green' }
+--- json
+{"color":"green","size":42}
+
+=== Simple array
+--- perl
+[qw(red white blue)]
+--- json
+["red","white","blue"]
+
+----
+# A TestML Document!
+%TestML: 1.0
+%Plan: 2
+
+perl.eval().encode() == json;
+
+=== Simple hash
+--- perl
+{ size => 42, color => 'green' }
+--- json
+{"color":"green","size":42}
+
+=== Simple array
+--- perl
+[qw(red white blue)]
+--- json
+["red","white","blue"]
+
+---- perl
+# Explicit test.t
+use TestML::Runner::TAP;
+
+TestML::Runner::TAP->new(
+    document => 'json_encoding.tml',
+    bridge => 'MyJsonBridge',
+)->run;
+
+---- perl
+# Sugar style test.t
+use TestML -run,
+    -document => 'json_encoding.tml',
+    -bridge => 'MyJsonBridge';
+
+---- perl,i0
+# Inline test.t
+use TestML -run,
+    -bridge => 'MyJsonBridge';
+__END__
+=== Test 1
+...
+
+---- python
+# Example Python runner using py.test
+from testml.runner.pytest import Runner
+from myjsonbridge import Bridge
+
+def test():
+    for test in Runner('tests/json_encoding.tml', Bridge).run(): yield test
+
+----
+== GitHub Repositories
+
+* All the TestML code is on GitHub
+** Including the spec!
+
+* http://github.com/ingydotnet/         Ingy's GitHub Code
+
+* .../testml                    The Spec and Documentation
+** http://testml.org built directly from gh-pages branch
+
+* .../testml-code               Example TestML Usage
+* .../testml-grammar            The Spec Grammar as YAML
+* .../testml-tml                TestML's TestML Suite!
+* .../testml-pm                 Perl Implementation
+* .../testml-py                 Python Implementation
+
+----
+== GitHub Repositories
+
+* Use git submodules to share sharable parts
+
+----
+== TestML is Self Bootstrapping
+
+* Writing a test framework is TDD by definition
+* TestML is TDD multiplied by implementations
+* All new ideas start at the sources:
+** The TestML Spec
+** The TestML TestSuite -- testml-tml repo
+* Spec changes get propagated to grammar.yaml
+* Problems with the language can be written as tests
+* All implementations can be ports of any other
+* Change propagation is critical
+** But common tests ensure it
+
+----
+== The 1.0 Spec
+
+* The 1.0 specification currently has the most info about TestML.
+
+        http://testml.org/spec/
+
+* The spec has a full pBNF grammar of the language.
+* 1.0 will be the first release
+* Will be released as soon as TestML "stabilizes"
+
+----
+== TestML Spec Versioning
+
+* Designing a language demands extensibility and compatability
+* Versioning forethought is critical
+* TestML requires a version directive be the first statement:
+
+    %TestML: 1.0
+
+* Minor versions extend the language
+* Major versions break compatability/support
+* Implementations should parse multiple versions
+* Related specs use a 1.0.0 format
+
+----
+== TestML Vocabulary Glossary
+
+* application - the code being tested
+* document - a complete TestML file or stream (meta/test/data)
+* section - meta, test or data
+* bridge - a class that connects a document to the application
+* block - a labeled set of named data points
+* point - a named piece of data
+* transform - a method that changes a data point's state
+* assertion - a truth test on 2 transformed data points
+* runner - the class that makes TestML work with your framework
+
+----
+== TestML Language Analysis
+
+See Spec
+
+* Meta Section
+** Namespacing - upper vs lower case
+* Test Section
+** Points, Transforms and Assertions
+* Data Section
+** Blocks and Points
+* Runtime
+** Block selection
+** Look at Perl runtime loop (this will be specced)
+** ONLY, SKIP, LAST
+
+----
+== Parser
+
+* Parsing TestML is very portable and spec driven
+
+* Show the 1.0 spec html
+* Show the grammar.yaml
+* Show TestML::Parser::Grammar
+
+* This parser technique will be made general at some point
+
+----
+== Runners
+
+* TestML provides no test harness or framework
+* It integrates with existing test frameworks
+* Every supported framework has a TestML Runner class
+
+* TestML::Runner::TAP for Perl (so far)
+* testml.runner.pytest.py for Python (so far)
+
+----
+== Bridge Classes
+
+* A bridge class is provides an API to the application
+  ...that the test section of a document can use
+* The bridge class is not named by the document
+** Class names are not portable
+** It could be implementation specific
+* A bridge class is a collection of transform methods
+
+    sub testml_foo {
+        my $self = shift;     # The TestML Topic Object
+        my $value = $self->value;
+        return Application->foo($value);
+    }
+
+----
+
+== Possible Weakness in Bridges
+
+* Bridge classes differ between implementations
+* Bridges are not specced like documents
+* This could cause problems with TestML
+
++However:
+
+* Bridge classes can/should be ported
+* When things are out of sync, add more tests
+* The problems found will make all implementations better
+
+----
+== Standard Library
+
+* TestML defines a standard library of transforms
+* They are specced and versioned as well
+* Transforms are polymorphic
+** Item vs List context
+
+* Point - Set a point as the current topic value
+* Str - Set a string as the current topic value
+* List - Turn multiline scalar into lines
+* Item - Join lines into scalar
+* Catch - Set topic value to last thrown error
+
+    The Standard Library is still under definition
+
+
+----
+== Miscellany
+
+* Module::Install::TestML
+* .tml files
+* -tml github repos
+* TestML will likely replace Test::Base
+
+----
+== Project Status and Roadmap
+
+* TestML development is a highly iterative process
+* Specification, Design, Implementation and Testing all at once
+* Probably 3 months until 1.0 release
+** Designed and intended to be released often
+** But need to get first release fully baked
+
+* Add to real world projects
+* Make changes to specs
+* Propagate out through implementations
+* Rinse, Lather, Repeat
+
+---- center
+Any Questions?
+
+----
+== Acmeism/TestML Hackathon
+
+* I'm looking for people interested in furthering TestML
+* I'm available to hack during my visit this week
+
+* Thursday and Friday
+* JS, P6, Java
+* Alternate Runners
+
+---- center
+The End
+
